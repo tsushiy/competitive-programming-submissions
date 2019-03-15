@@ -1,0 +1,5 @@
+n = int(input())
+hh = str(n//3600).zfill(2)
+mm = str((n%3600)//60).zfill(2)
+ss = str(n%60).zfill(2)
+print(hh+":"+mm+":"+ss)
