@@ -1,0 +1,8 @@
+a, b = input().split()
+a1 = int("9"+a[1:])-int(b)
+a2 = int(a[0]+"9"+a[2])-int(b)
+a3 = int(a[:2]+"9")-int(b)
+a4 = int(a)-int("1"+b[1:])
+a5 = int(a)-int(b[0]+"0"+b[2])
+a6 = int(a)-int(b[:2]+"0")
+print(max(a1, a2, a3, a4, a5, a6))
