@@ -1,5 +1,0 @@
-n = int(input())
-a = list(map(int, input().split()))
-max_ = max(a)
-min_ = min(a)
-print(max_-min_)

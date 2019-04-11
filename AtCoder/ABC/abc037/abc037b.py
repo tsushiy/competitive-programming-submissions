@@ -1,8 +1,0 @@
-n, q = list(map(int, input().split()))
-a = [0]*n
-for i in range(q):
-  l, r, t = list(map(int, input().split()))
-  for j in range(l-1, r):
-    a[j] = t
-for ele in a:
-  print(ele)
