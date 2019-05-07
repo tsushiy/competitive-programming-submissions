@@ -1,6 +1,7 @@
-/answer.py
-/input
-/output
-/.vscode
+.vscode/ipch
+.input
+.output
+out
+template.cpp
 */ignore
-/Others
+Others
