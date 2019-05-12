@@ -5,5 +5,8 @@ def gcd(a, b):
     return a
   return gcd(b, a%b)
 
+def gcd(a, b):
+  return gcd(b, a%b) if b else a
+
 from functools import reduce
 g = reduce(gcd, a)
