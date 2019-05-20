@@ -1,4 +1,5 @@
 import sys
+from collections import deque
 sys.setrecursionlimit(50*50)
 
 R, C = map(int, input().split())
@@ -11,15 +12,15 @@ for i in range(R):
 d = [[float("INF")]*C for _ in range(R)]
 
 def bfs():
-  que = [(sy, sx)]
+  que = deque([(sy, sx)])
   d[sy][sx] = 0
 
   while len(que) > 0:
-    p = que.pop(0)
+    p = que.popleft()
 
     if p[0] == gy and p[1] == gx:
       break
-    
+
     for dy in range(-1, 2):
       for dx in range(-1, 2):
         if (dy==0 and dx==0) or (dy!=0 and dx!=0):
@@ -27,7 +28,7 @@ def bfs():
         else:
           ny = p[0]+dy
           nx = p[1]+dx
-        
+
         if 0<=ny<R and 0<=nx<C and c[ny][nx]!="#" and d[ny][nx]==float("INF"):
           que.append((ny, nx))
           d[ny][nx] = d[p[0]][p[1]]+1

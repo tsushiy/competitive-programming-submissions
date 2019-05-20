@@ -1,9 +1,9 @@
 n = int(input())
-s = set()
+ans = set()
 for i in range(n):
   a = int(input())
-  if a in s:
-    s.remove(a)
+  if a in ans:
+    ans.remove(a)
   else:
-    s.add(a)
-print(len(s))
+    ans.add(a)
+print(len(ans))

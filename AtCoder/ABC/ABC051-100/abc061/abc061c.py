@@ -1,11 +1,12 @@
 n, k = list(map(int, input().split()))
-from collections import defaultdict
-d = defaultdict(int)
+d = [0 for i in range(100010)]
+
 for i in range(n):
   a, b = list(map(int, input().split()))
   d[a] += b
-for ele in sorted(d.items()):
-  k -= ele[1]
+
+for j, e in enumerate(d):
+  k -= e
   if k<=0:
-    print(ele[0])
+    print(j)
     break

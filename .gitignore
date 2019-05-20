@@ -2,6 +2,7 @@
 .input
 .output
 out
-template.cpp
 */ignore
 Others
+test.cpp
+test.py

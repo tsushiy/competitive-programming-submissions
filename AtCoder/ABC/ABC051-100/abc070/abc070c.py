@@ -1,18 +1,12 @@
-n = int(input())
-t = [int(input()) for i in range(n)]
-
 def gcd(a, b):
-  if a<b:
-    a, b = b, a
-  if b==0:
-    return a
-  return gcd(b, a%b)
+  return gcd(b, a%b) if b else a
 
 def lcm(a, b):
-  g = gcd(a, b)
-  return a*b//g
+  return a*b//gcd(a, b)
 
+n = int(input())
 ans = 1
 for i in range(n):
-  ans = lcm(ans, t[i])
+  t = int(input())
+  ans = lcm(ans, t)
 print(ans)

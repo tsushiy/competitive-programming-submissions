@@ -1,20 +1,18 @@
 s = input()
 t = input()
-ans = []
-if len(t)>len(s):
-  print("UNRESTORABLE")
+ans = set()
+for i in range(len(s)-len(t)+1):
+  cur = s[:i].replace("?", "a")
+  for j in range(len(t)):
+    if s[i+j]=="?" or s[i+j]==t[j]:
+      cur += t[j]
+    else:
+      break
+  cur += s[i+j+1:].replace("?", "a")
+  if len(cur)==len(s):
+    ans.add(cur)
+
+if len(ans):
+  print(sorted(ans)[0])
 else:
-  for i in range(len(s)-len(t)+1):
-    st = ""
-    for j in range(len(t)):
-      if s[j+i]=="?" or s[j+i]==t[j]:
-        st+=t[j]
-      else:
-        break
-    if len(st)==len(t):
-      st = s[:i]+st+s[i+len(t):]
-      ans.append(st.replace("?", "a"))
-  if len(ans):
-    print(sorted(ans)[0])
-  else:
-    print("UNRESTORABLE")
+  print("UNRESTORABLE")

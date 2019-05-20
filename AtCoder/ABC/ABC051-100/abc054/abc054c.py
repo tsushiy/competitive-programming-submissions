@@ -1,30 +1,23 @@
-n, m = map(int, input().split())
-e = [[False]*n for _ in range(n)]
-for m in range(m):
-  a, b = map(int, input().split())
-  e[a-1][b-1] = True
-  e[b-1][a-1] = True
-visited = [False for _ in range(n)]
-
+from collections import defaultdict
+n, m = list(map(int, input().split()))
+edge = defaultdict(list)
+for i in range(m):
+  a, b = list(map(int, input().split()))
+  edge[a-1].append(b-1)
+  edge[b-1].append(a-1)
+visited = [0 for i in range(n)]
 ans = 0
 
-def dfs(v):
-  global ans
+def dfs(x, t):
+  if t==n:
+    return 1
 
-  if all(visited):
-    ans += 1
-    return
-  
-  for i in range(n):
-    if e[v][i] == False:
-      continue
-    if visited[i] == True:
-      continue
+  visited[x] = 1
+  cur = 0
+  for nx in edge[x]:
+    if not visited[nx]:
+      cur += dfs(nx, t+1)
+  visited[x] = 0
+  return cur
 
-    visited[i] = True
-    dfs(i)
-    visited[i] = False
-
-visited[0] = True
-dfs(0)
-print(ans)
+print(dfs(0, 1))

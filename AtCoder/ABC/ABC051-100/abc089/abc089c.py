@@ -12,7 +12,7 @@ for _ in range(n):
     c[3]+=1
   elif s[0]=="H":
     c[4]+=1
-    
+
 ans = 0
 for i in range(5):
   for j in range(i+1, 5):

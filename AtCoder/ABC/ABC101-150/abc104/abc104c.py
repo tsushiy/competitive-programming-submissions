@@ -1,21 +1,29 @@
 d, g = list(map(int, input().split()))
-pc = []
-for i in range(d):
-  pt, ct = list(map(int, input().split()))
-  pc.append((pt, ct, (i+1)*100*pt+ct))
-
+pc = [list(map(int, input().split())) for i in range(d)]
 ans = float("INF")
-for i in range(d):
-  t = 0
-  for j in range(pc[i][0]):
-    t += (i+1)*100
-    if j==pc[i][0]-1:
-      t += pc[i][1]
-    if t>=g:
-      ans = min(ans, j+1)
-      break
-if ans!=float("INF"):
-  print(ans)
-else:
-  pass
-print(pc)
+
+for i in range(2**d):
+  num = 0
+  score = 0
+  for j in range(d):
+    if i&(1<<j):
+      num += pc[j][0]
+      score += (j+1)*100*pc[j][0] + pc[j][1]
+  j = d-1
+  while score<g and j>=0:
+    if i&(1<<j) == 0:
+      rem = g-score
+      tmax = (j+1)*100*pc[j][0]
+      if rem>=tmax:
+        num += pc[j][0]
+        score += tmax
+      else:
+        for k in range(1, pc[j][0]):
+          num += 1
+          score += (j+1)*100
+          if score>=g:
+            break
+    j -= 1
+  if score>=g:
+    ans = min(ans, num)
+print(ans)

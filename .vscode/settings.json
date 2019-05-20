@@ -1,5 +1,12 @@
 {
   "workbench.colorCustomizations": {
     "activityBar.background": "#7c2929"
+  },
+  "files.associations": {
+    "iostream": "cpp",
+    "ostream": "cpp",
+    "*.tcc": "cpp",
+    "list": "cpp",
+    "tuple": "cpp"
   }
 }
