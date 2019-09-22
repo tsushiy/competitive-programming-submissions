@@ -1,7 +1,7 @@
 .vscode/ipch
 .input
 .output
-out
+a.out
 */ignore
 Others
 test.cpp

@@ -1,17 +1,12 @@
 n = int(input())
 s = input()
-MOD = 10**9+7
-
-from collections import defaultdict
-import string
-d = defaultdict(int)
-let = string.ascii_lowercase
-
-for ele in s:
-  d[ele] += 1
-
-ans = 1
-for i in range(26):
-  if d[let[i]]>0:
-    ans = (ans*(d[let[i]]+1))%MOD
+from collections import Counter
+c = Counter(s)
+ans = 0
+mod = 10**9+7
+for k, v in c.items():
+  if ans == 0:
+    ans = v+1
+  else:
+    ans = (ans * (v+1)) % mod
 print(ans-1)
