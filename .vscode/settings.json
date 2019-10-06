@@ -36,6 +36,8 @@
     "typeindex": "cpp",
     "utility": "cpp",
     "valarray": "cpp",
-    "numeric": "cpp"
+    "numeric": "cpp",
+    "limits": "cpp",
+    "iomanip": "cpp"
   }
 }

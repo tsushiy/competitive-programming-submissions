@@ -8,6 +8,16 @@ constexpr int MOD = 1000000007;
 constexpr int INF = 1LL << 30;
 constexpr long long LLINF = 1LL << 60;
 
+template<typename T>
+ostream &operator<<(ostream &os, const vector<T> &vec) {
+  os << "[";
+  for (auto it = vec.begin(); it != vec.end(); ++it) {
+    if (it != vec.begin()) os << ", ";
+    os << *it;
+  }
+  return os << "]";
+}
+
 inline void print(void) { cout<<'\n'; }
 template<class T> inline void print(const T &x) { cout<<x<<'\n'; }
 template<class T, class... U> inline void print(const T &x, const U&... y) { cout<<x<<" "; print(y...); }
@@ -35,12 +45,7 @@ vector<vector<T>> warshall_floyd(const vector<vector<pair<int, T>>> &graph) {
 }
 
 int main() {
-  int n, m, rt; cin>>n>>m>>rt;
-  vector<int> r(rt);
-  rep(i, rt) {
-    cin>>r[i]; --r[i];
-  }
-  sort(r.begin(), r.end());
+  int n, m; cin>>n>>m;
   vector<vector<pair<int, int>>> g(n);
   rep(i, m) {
     int a, b, c; cin>>a>>b>>c;
@@ -48,17 +53,14 @@ int main() {
     g[a].emplace_back(b, c);
     g[b].emplace_back(a, c);
   }
-
   auto dists = warshall_floyd(g);
-  int ans = INF;
-  do {
-    int t = 0;
-    rep(i, rt-1) {
-      t += dists[r[i]][r[i+1]];
+  int ans = 0;
+  rep(i, n) {
+    for (auto x: g[i]) {
+      if (x.first <= i) continue;
+      if (x.second > dists[i][x.first]) ++ans;
     }
-    ans = min(ans, t);
-  } while (next_permutation(r.begin(), r.end()));
+  }
   print(ans);
-
   return 0;
 }
