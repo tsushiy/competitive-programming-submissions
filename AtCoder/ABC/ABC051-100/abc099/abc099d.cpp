@@ -4,31 +4,29 @@ using namespace std;
 #define RREP(i,b,e) for(int i=(b)-1;i>=e;--i)
 #define rep(i,e) for(int i=0;i<(e);++i)
 
+constexpr int INF = 1LL << 30;
+
 inline void print(void) { cout<<'\n'; }
 template<class T> inline void print(const T &x) { cout<<x<<'\n'; }
 template<class T, class... U> inline void print(const T &x, const U&... y) { cout<<x<<" "; print(y...); }
 
-template<typename T>
-T gcd(T a, T b) {
-  while (a) {
-    b %= a;
-    swap(a, b);
-  }
-  return b;
-}
-
 int main() {
-  int n; cin>>n;
-  vector<int> a(n);
-  rep(i, n) cin>>a[i];
+  int n, c; cin>>n>>c;
+  int d[30][30];
+  rep(i, c) rep(j, c) cin>>d[i][j];
 
-  vector<int> l(n), r(n);
-  l[0] = a[0];
-  r[n-1] = a[n-1];
-  REP(i, 1, n) l[i] = gcd(l[i-1], a[i]);
-  RREP(i, n-1, 0) r[i] = gcd(r[i+1], a[i]);
-  int ans = max(l[n-2], r[1]);
-  REP(i, 1, n-1) ans = max(ans, gcd(l[i-1], r[i+1]));
+  int a[3][30] = {};
+  rep(i, n) rep(j, n) {
+    int ct; cin>>ct; --ct;
+    rep(k, c) a[(i+j)%3][k] += d[ct][k];
+  }
+
+  int ans = INF;
+  rep(i, c) rep(j, c) rep(k, c) {
+    if (i==j || j==k || k==i) continue;
+    ans = min(ans, a[0][i]+a[1][j]+a[2][k]);
+  }
   print(ans);
+
   return 0;
 }

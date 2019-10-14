@@ -1,31 +1,29 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#define rep(i,n) for(int i=0;i<(int)n;++i)
-template<class T, class U>inline bool chmax(T &a, U const &b) { if(a<b){ a=b;return 1; } return 0; }
-template<class T, class U>inline bool chmin(T &a, U const &b) { if(b<a){ a=b;return 1; } return 0; }
-const int inf = 1e9+7;
+#define REP(i,b,e) for(int i=(b);i<(e);++i)
+#define RREP(i,b,e) for(int i=(b)-1;i>=e;--i)
+#define rep(i,e) for(int i=0;i<(e);++i)
+
+inline void print(void) { cout<<'\n'; }
+template<class T> inline void print(const T &x) { cout<<x<<'\n'; }
+template<class T, class... U> inline void print(const T &x, const U&... y) { cout<<x<<" "; print(y...); }
 
 int main() {
-  int n;
-  cin >> n;
+  int n; cin>>n;
   vector<int> a(n);
-  rep(i, n) { cin >> a[i]; }
+  rep(i, n) cin>>a[i];
+  sort(a.begin(), a.end(), [](auto x, auto y){ return abs(x) > abs(y); });
+
+  bool good = true;
+  rep(i, n) if (a[i] < 0) good = !good;
 
   long long ans = 0;
-  int neg = 0, min = inf;
-  rep(i, n) {
-    if (a[i] < 0) {
-      ++neg;
-      a[i] *= -1;
-    }
-    ans += a[i];
-    chmin(min, a[i]);
+  if (good) rep(i, n) ans += abs(a[i]);
+  else {
+    rep(i, n-1) ans += abs(a[i]);
+    ans -= abs(a[n-1]);
   }
+  print(ans);
 
-  if (neg % 2) {
-    cout << ans - min * 2 << endl;
-  } else {
-    cout << ans << endl;
-  }
   return 0;
 }

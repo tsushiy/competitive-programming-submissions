@@ -8,27 +8,16 @@ inline void print(void) { cout<<'\n'; }
 template<class T> inline void print(const T &x) { cout<<x<<'\n'; }
 template<class T, class... U> inline void print(const T &x, const U&... y) { cout<<x<<" "; print(y...); }
 
-template<typename T>
-T gcd(T a, T b) {
-  while (a) {
-    b %= a;
-    swap(a, b);
-  }
-  return b;
+long long f(long long x) {
+  if (x % 4 == 0) return x;
+  else if (x % 4 == 1) return 1;
+  else if (x % 4 == 2) return x+1;
+  else return 0;
 }
 
 int main() {
-  int n; cin>>n;
-  vector<int> a(n);
-  rep(i, n) cin>>a[i];
+  long long a, b; cin>>a>>b;
+  print(f(a-1)^f(b));
 
-  vector<int> l(n), r(n);
-  l[0] = a[0];
-  r[n-1] = a[n-1];
-  REP(i, 1, n) l[i] = gcd(l[i-1], a[i]);
-  RREP(i, n-1, 0) r[i] = gcd(r[i+1], a[i]);
-  int ans = max(l[n-2], r[1]);
-  REP(i, 1, n-1) ans = max(ans, gcd(l[i-1], r[i+1]));
-  print(ans);
   return 0;
 }

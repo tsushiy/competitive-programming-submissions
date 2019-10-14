@@ -8,27 +8,28 @@ inline void print(void) { cout<<'\n'; }
 template<class T> inline void print(const T &x) { cout<<x<<'\n'; }
 template<class T, class... U> inline void print(const T &x, const U&... y) { cout<<x<<" "; print(y...); }
 
-template<typename T>
-T gcd(T a, T b) {
-  while (a) {
-    b %= a;
-    swap(a, b);
+long long sum[51], p[51];
+
+long long rec(long long n, long long x) {
+  if (n == 0) {
+    if (x >= 1) return 1;
+    else return 0;
   }
-  return b;
+  if (sum[n-1] + 1 < x) {
+    return p[n-1] + 1 + rec(n-1, x-2-sum[n-1]);
+  } else {
+    return rec(n-1, x-1);
+  }
 }
 
 int main() {
-  int n; cin>>n;
-  vector<int> a(n);
-  rep(i, n) cin>>a[i];
+  long long n, x; cin>>n>>x;
+  sum[0] = 1, p[0] = 1;;
+  rep(i, 50) {
+    sum[i+1] = 3 + 2*sum[i];
+    p[i+1] = 1 + 2*p[i];
+  }
+  print(rec(n, x));
 
-  vector<int> l(n), r(n);
-  l[0] = a[0];
-  r[n-1] = a[n-1];
-  REP(i, 1, n) l[i] = gcd(l[i-1], a[i]);
-  RREP(i, n-1, 0) r[i] = gcd(r[i+1], a[i]);
-  int ans = max(l[n-2], r[1]);
-  REP(i, 1, n-1) ans = max(ans, gcd(l[i-1], r[i+1]));
-  print(ans);
   return 0;
 }

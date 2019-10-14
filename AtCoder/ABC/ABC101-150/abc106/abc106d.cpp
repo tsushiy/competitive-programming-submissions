@@ -9,15 +9,18 @@ template<class T> inline void print(const T &x) { cout<<x<<'\n'; }
 template<class T, class... U> inline void print(const T &x, const U&... y) { cout<<x<<" "; print(y...); }
 
 int main() {
-  int n, k; cin>>n>>k;
-  double ans = 0;
-
-  REP(i, 1, n+1) {
-    double t = (double)1 / n;
-    for (int j = i; j < k; j *= 2) t /= 2;
-    ans += t;
+  int n, m, q; cin>>n>>m>>q;
+  vector<vector<int>> lr(n+1, vector<int>(n+1, 0));
+  rep(i, m) {
+    int l, r; cin>>l>>r;
+    ++lr[l][r];
   }
-  cout << fixed << setprecision(10) << ans << endl;
+
+  rep(i, n) rep(j, n) lr[i+1][j+1] += lr[i][j+1] + lr[i+1][j] - lr[i][j];
+  rep(i, q) {
+    int l, r; cin>>l>>r;
+    print(lr[r][r] - lr[l-1][r] - lr[r][l-1] + lr[l-1][l-1]);
+  }
 
   return 0;
 }

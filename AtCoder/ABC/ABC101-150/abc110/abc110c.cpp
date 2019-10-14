@@ -9,15 +9,22 @@ template<class T> inline void print(const T &x) { cout<<x<<'\n'; }
 template<class T, class... U> inline void print(const T &x, const U&... y) { cout<<x<<" "; print(y...); }
 
 int main() {
-  int n, k; cin>>n>>k;
-  double ans = 0;
-
-  REP(i, 1, n+1) {
-    double t = (double)1 / n;
-    for (int j = i; j < k; j *= 2) t /= 2;
-    ans += t;
+  string s, t; cin>>s>>t;
+  if (s.size() != t.size()) {
+    print("No");
+    return 0;
   }
-  cout << fixed << setprecision(10) << ans << endl;
+
+  vector<set<int>> ss(30), ts(30);
+  rep(i, s.size()){
+    ss[s[i]-'a'].emplace(t[i]-'a');
+    ts[t[i]-'a'].emplace(s[i]-'a');
+  }
+  rep(i, 30) if (ss[i].size() > 1 or ts[i].size() > 1) {
+    print("No");
+    return 0;
+  }
+  print("Yes");
 
   return 0;
 }

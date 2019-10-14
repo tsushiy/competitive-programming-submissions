@@ -10,14 +10,29 @@ template<class T, class... U> inline void print(const T &x, const U&... y) { cou
 
 int main() {
   int n, k; cin>>n>>k;
-  double ans = 0;
+  string s; cin>>s;
+  vector<int> a;
 
-  REP(i, 1, n+1) {
-    double t = (double)1 / n;
-    for (int j = i; j < k; j *= 2) t /= 2;
-    ans += t;
+  a.emplace_back(0);
+  if (s[0] == '0') a.emplace_back(0);
+
+  int cur = 1;
+  REP(i, 1, n) {
+    if (s[i] == s[i-1]) ++cur;
+    else {
+      a.emplace_back(cur);
+      cur = 1;
+    }
   }
-  cout << fixed << setprecision(10) << ans << endl;
+  a.emplace_back(cur);
+  rep(i, 3*k) a.emplace_back(0);
+  rep(i, a.size()-1) a[i+1] += a[i];
+
+  int ans = 0;
+  for (int i = 1; i+2*k < a.size(); i += 2) {
+    ans = max(ans, a[i+2*k] - a[i-1]);
+  }
+  print(ans);
 
   return 0;
 }
