@@ -1,7 +1,8 @@
 .vscode/ipch
 .input
 .output
-a.out
+*.out
+*.dSYM
 */ignore
 Others
 test.cpp
