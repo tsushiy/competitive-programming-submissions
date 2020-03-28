@@ -41,6 +41,9 @@
     "iomanip": "cpp",
     "cmath": "cpp",
     "random": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "forward_list": "cpp",
+    "vector": "cpp",
+    "string_view": "cpp"
   }
 }
