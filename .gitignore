@@ -1,9 +1,7 @@
-.vscode/ipch
-.input
-.output
 *.out
 *.dSYM
-*/ignore
-Others
-test.cpp
-test.py
+!/.vscode/c_cpp_properties.json
+/.input
+/.output
+/test.cpp
+/test.py
