@@ -1,6 +1,8 @@
+*.in
 *.out
 *.dSYM
 !/.vscode/c_cpp_properties.json
+!/.vscode/settings.json
 /.input
 /.output
 /test.cpp
