@@ -1,10 +1,9 @@
 #!/bin/zsh
 
-# Git で管理されていないファイルを削除
+# Gitで管理されていないファイルを削除
 if git rev-parse 2> /dev/null; then
-  files=$(git ls-files --others)
-  echo "Git で管理されていないファイルを削除します..."
-  rm -fv "${(f)files}"
+  echo "Gitで管理されていないファイルを削除します..."
+  git clean -d -x -f
 fi
 
 # 空ディレクトリを削除
